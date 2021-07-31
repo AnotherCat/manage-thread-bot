@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"discord.py" = {git = "https://github.com/rapptz/discord.py"}
+tortoise-orm = {extras = ["asyncpg"], version = "*"}
+aerich = "*"
+black = "==21.4b2"
+isort = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

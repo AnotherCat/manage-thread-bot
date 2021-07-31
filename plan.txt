@@ -1,0 +1,25 @@
+storage
+one kv namespace
+
+data:
+    key: thread id
+    data: "keepalive" | "pendingpoll"
+
+cmds:
+/keep-alive channel:thread - sets <id> : "keepalive"
+/start-poll-waiting channel:thread  - sets <id> : "pendingpoll"
+/remove-channel-action channel:thread - deletes <id>
+/list-channels
+
+restricted to one guild
+
+
+cron job every hour
+fetches each thread, makes sure it's 
+
+nah just do d.py it's too hard lol
+
+listen for archive + check for archive twice a day
+check activity for polls once an hour
+
+wait full day of no activity before sending poll
