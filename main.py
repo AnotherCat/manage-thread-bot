@@ -11,7 +11,7 @@ from tortoise import Tortoise
 from config import POLL_ROLE_PING, THREAD_INACTIVE_HOURS, token, ADD_USER_IDS
 from tortoise_config import TORTOISE_ORM
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 THREAD_INACTIVE_TIME = 60 * 60 * THREAD_INACTIVE_HOURS
