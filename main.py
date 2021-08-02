@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from datetime import datetime, timedelta, timezone
 
@@ -7,7 +8,7 @@ from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import Context
 from tortoise import Tortoise
 
-from config import POLL_ROLE_PING, THREAD_INACTIVE_HOURS, token
+from config import POLL_ROLE_PING, THREAD_INACTIVE_HOURS, token, ADD_USER_IDS
 from tortoise_config import TORTOISE_ORM
 
 logging.basicConfig(level=logging.DEBUG)
@@ -167,6 +168,19 @@ async def on_thread_update(before: discord.Thread, after: discord.Thread) -> Non
     if thread_settings is None:
         return
     await check_archive(before, after, thread_settings)
+
+
+@bot.event
+async def on_thread_join(thread: discord.Thread) -> None:
+    if len(ADD_USER_IDS) < 1:
+        return
+    for user_id in ADD_USER_IDS:
+        if user_id == thread.owner_id:
+            continue
+        await thread.add_user(discord.Object(user_id))
+        await asyncio.sleep(5)
+
+    await thread.add_user(bot.user)
 
 
 @tasks.loop(hours=1)
